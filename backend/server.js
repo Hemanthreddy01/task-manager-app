@@ -8,11 +8,16 @@ const db = require("./db");
 const app = express();
 
 
+
+
 app.use(cors({
-  origin: "https://task-manager-app-phi-two.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+
+app.options("*", cors());
 
 
 app.use(express.json());
