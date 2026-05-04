@@ -9,10 +9,9 @@ const app = express();
 
 
 app.use(cors({
-  origin: "https://task-manager-app-phi-two.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: "*"
 }));
+
 
 app.use(express.json());
 
