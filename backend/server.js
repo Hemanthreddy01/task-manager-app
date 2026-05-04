@@ -138,8 +138,12 @@ app.put("/api/tasks/:id", (req, res) => {
   );
 });
 
-app.use(require("cors")({
-  origin: "*"
+const cors = require("cors");
+
+app.use(cors({
+  origin: "https://task-manager-app-phi-two.vercel.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 
 const PORT = process.env.PORT || 5000;
