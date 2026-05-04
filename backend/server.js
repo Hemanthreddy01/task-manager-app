@@ -11,13 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 
-// ✅ TEST ROUTE
+
 app.get("/", (req, res) => {
   res.send("API Running ✅");
 });
 
 
-// ✅ SIGNUP API (WITH ROLE)
 app.post("/api/signup", async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -44,7 +43,6 @@ app.post("/api/signup", async (req, res) => {
 });
 
 
-// ✅ LOGIN API (RETURN ROLE)
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -139,6 +137,10 @@ app.put("/api/tasks/:id", (req, res) => {
     }
   );
 });
+
+app.use(require("cors")({
+  origin: "*"
+}));
 
 const PORT = process.env.PORT || 5000;
 
