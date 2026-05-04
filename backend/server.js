@@ -15,6 +15,10 @@ app.use(cors({
 
 app.use(express.json());
 
+app.get("/test", (req, res) => {
+  res.send("NEW DEPLOY WORKING");
+});
+
 
 app.get("/", (req, res) => {
   res.send("API Running ✅");
