@@ -11,7 +11,7 @@ export default function Signup() {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch("https://task-manager-app-production-3b52.up.railway.app/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -15,12 +15,12 @@ export default function AdminDashboard() {
       return;
     }
 
-    fetch("http://localhost:5000/api/members")
+    fetch("https://task-manager-app-production-3b52.up.railway.app/api/members")
       .then(res => res.json())
       .then(data => setMembers(Array.isArray(data) ? data : []))
       .catch(console.error);
 
-    fetch("http://localhost:5000/api/tasks")
+    fetch("https://task-manager-app-production-3b52.up.railway.app/api/tasks")
       .then(res => res.json())
       .then(data => setTasks(Array.isArray(data) ? data : []))
       .catch(console.error);
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
       return;
     }
 
-    await fetch("http://localhost:5000/api/tasks", {
+    await fetch("https://task-manager-app-production-3b52.up.railway.app/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
     alert("Task assigned");
 
     // reload tasks properly
-    fetch("http://localhost:5000/api/tasks")
+    fetch("https://task-manager-app-production-3b52.up.railway.app/api/tasks")
       .then(res => res.json())
       .then(data => setTasks(Array.isArray(data) ? data : []));
   };

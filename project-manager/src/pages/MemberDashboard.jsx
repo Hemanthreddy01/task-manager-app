@@ -23,7 +23,7 @@ export default function MemberDashboard() {
       return;
     }
 
-    fetch(`http://localhost:5000/api/my-tasks/${userId}`)
+    fetch(`https://task-manager-app-production-3b52.up.railway.app/api/my-tasks/${userId}`)
       .then(res => res.json())
       .then(data => setTasks(Array.isArray(data) ? data : []))
       .catch(console.error);
@@ -36,7 +36,7 @@ export default function MemberDashboard() {
   };
 
   const updateStatus = async (taskId, status) => {
-    await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+    await fetch(`https://task-manager-app-production-3b52.up.railway.app/api/tasks/${taskId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
