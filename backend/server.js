@@ -7,8 +7,7 @@ const db = require("./db");
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+
 
 
 
@@ -138,13 +137,15 @@ app.put("/api/tasks/:id", (req, res) => {
   );
 });
 
-const cors = require("cors");
+
 
 app.use(cors({
-  origin: "https://task-manager-app-phi-two.vercel.app/",
+  origin: "https://task-manager-app-phi-two.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
