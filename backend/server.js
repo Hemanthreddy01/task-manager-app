@@ -30,28 +30,42 @@ app.get("/", (req, res) => {
 
 
 app.post("/api/signup", async (req, res) => {
-  const { name, email, password, role } = req.body;
+  try {
+    console.log("SIGNUP HIT");
 
-  db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
-    if (result.length > 0) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+    const { name, email, password, role } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
 
-    db.query(
-      "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
-      [name, email, hashedPassword, role || "member"],
-      (err) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ message: "DB error" });
-        }
-
-        res.json({ message: "Signup successful" });
+      if (err) {
+        console.log("DB ERROR:", err);
+        return res.status(500).json({ message: "DB error" });
       }
-    );
-  });
+
+      if (result.length > 0) {
+        return res.status(400).json({ message: "User already exists" });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      db.query(
+        "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
+        [name, email, hashedPassword, role || "member"],
+        (err) => {
+          if (err) {
+            console.log("INSERT ERROR:", err);
+            return res.status(500).json({ message: "Insert error" });
+          }
+
+          res.json({ message: "Signup successful" });
+        }
+      );
+    });
+
+  } catch (error) {
+    console.log("SERVER ERROR:", error);
+    res.status(500).json({ message: "Server crash" });
+  }
 });
 
 
