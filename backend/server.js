@@ -31,15 +31,13 @@ app.get("/", (req, res) => {
 
 app.post("/api/signup", async (req, res) => {
   try {
-    console.log("SIGNUP HIT");
-
     const { name, email, password, role } = req.body;
 
     db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
 
       if (err) {
-        console.log("DB ERROR:", err);
-        return res.status(500).json({ message: "DB error" });
+        console.log("❌ SELECT ERROR:", err);
+        return res.status(500).json({ message: err.message });
       }
 
       if (result.length > 0) {
@@ -53,8 +51,8 @@ app.post("/api/signup", async (req, res) => {
         [name, email, hashedPassword, role || "member"],
         (err) => {
           if (err) {
-            console.log("INSERT ERROR:", err);
-            return res.status(500).json({ message: "Insert error" });
+            console.log("❌ INSERT ERROR:", err);
+            return res.status(500).json({ message: err.message });
           }
 
           res.json({ message: "Signup successful" });
@@ -63,11 +61,10 @@ app.post("/api/signup", async (req, res) => {
     });
 
   } catch (error) {
-    console.log("SERVER ERROR:", error);
-    res.status(500).json({ message: "Server crash" });
+    console.log("❌ SERVER ERROR:", error);
+    res.status(500).json({ message: error.message });
   }
 });
-
 
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
