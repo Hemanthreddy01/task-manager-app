@@ -10,7 +10,32 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
-    console.log('hello');
+    try {
+      const res = await fetch("https://task-manager-app-production-3b52.up.railway.app/api/signup?test=123", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          role, 
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Signup successful");
+        navigate("/login");
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Error signing up");
+    }
   };
 
   return (
