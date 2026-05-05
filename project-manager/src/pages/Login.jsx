@@ -10,7 +10,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch("https://task-manager-app-production-3b52.up.railway.app/login", {
+      const res = await fetch("https://task-manager-app-production-3b52.up.railway.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
